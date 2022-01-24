@@ -1,9 +1,8 @@
 #include <iostream>
 #include <deque>
+using namespace std;
 
 #define forn(max) for (int w=0; w<max; w++)
-
-using namespace std;
 
 void printDeque(deque<int> arreglo) {
 	forn(arreglo.size()) { cout << arreglo.at(w) << " "; }
@@ -16,27 +15,16 @@ bool contiene(deque<int> arreglo, int elemento) {
 }
 
 int main() {
-
 	int N, Q; cin >> N >> Q;
-
-	deque<int> hilera;
-	deque<int> diferencias;
-	deque<int> distintosMenorK;
-
+	deque<int> hilera; deque<int> diferencias; deque<int> distintosMenorK;
 	forn(N) { int n; cin >> n; hilera.push_back(n); }
 	forn(Q) {
 		// Movimiento
 		int t, L, R, K;
 		cin >> t >> L >> R >> K;
-
 		L--; R--;
-
-		if (t == 1 && K == 0) {
-			// Evento tipo 1
-			hilera[L] = R;
-		}
-		else if (t == 2) {
-			// Evento tipo 2
+		if (t == 1 && K == 0) { hilera[L] = R; } // Evento tipo 1 
+		else if (t == 2) { // Evento tipo 2
 			int max_intervalo = hilera[L]; int min_intervalo = hilera[L];
 			for (int d = L; d <= R; d++) {
 				if (hilera.at(d) > max_intervalo) max_intervalo = hilera.at(d);
@@ -56,10 +44,8 @@ int main() {
 			distintosMenorK.push_back(distintosMK_counter);
 		}
 	}
-
 	printDeque(diferencias);
 	printDeque(distintosMenorK);
-
 	return 0;
 }
 
